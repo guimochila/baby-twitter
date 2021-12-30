@@ -63,7 +63,7 @@ function getTweetsRoutes() {
    *                 example: 1
    *               tweet:
    *                 type: string
-   *                 description: The tweet text
+   *                 description: The tweet a text
    *                 example: This is a tweet
    *     responses:
    *       201:

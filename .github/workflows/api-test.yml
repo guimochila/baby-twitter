@@ -21,6 +21,10 @@ jobs:
           cd apps/api
           yarn
       - name: Running linter
-        run: yarn run lint
+        run: |-
+          cd apps/api
+          yarn run lint
       - name: Running tests
-        run: yarn test
+        run: |-
+          cd apps/api
+          yarn test
