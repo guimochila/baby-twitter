@@ -29,7 +29,7 @@ function getAuthRoutes() {
    *        description: Authenticated
    *       401:
    *        description: Not Authenticated
-   *         ...
+   *
    */
   router.post('/', passport.authenticate('local', { session: false }), login)
 

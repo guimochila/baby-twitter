@@ -1,4 +1,4 @@
-name: API Test
+name: API Linting and Testing
 on:
   push:
     branches: [main]
@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test-and-lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,4 +20,7 @@ jobs:
         run: |-
           cd apps/api
           yarn
-          yarn test
+      - name: Running linter
+        run: yarn run lint
+      - name: Running tests
+        run: yarn test
