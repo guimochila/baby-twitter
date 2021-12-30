@@ -12,7 +12,8 @@
   },
   "turbo": {
     "pipeline": {
-      "lint": {}
+      "lint": {},
+      "test": {}
     }
   }
 }
