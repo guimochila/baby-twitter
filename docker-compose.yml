@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  web:
+    image: node:16-alpine
+    container_name: twitter_client
+    working_dir: /web
+    volumes:
+      - ./node_modules:/web/node_modules
+      - ./apps/web:/web
+      - ./apps/web/package.json:/web/package.json
+    ports:
+      - 3000:3000
+    command: yarn start
+    env_file:
+      - ./apps/web/.env
+
+  api-service:
+    image: node:16-alpine
+    container_name: twitter_api
+    working_dir: /api
+    volumes:
+      - ./node_modules:/api/node_modules
+      - ./apps/api:/api
+      - ./apps/api/package.json:/api/package.json
+    ports:
+      - 3001:3001
+    depends_on:
+      - postgres
+    command: yarn run dev
+    env_file: ./apps/api/.env-sample
+
+  postgres:
+    image: postgres
+    container_name: twitter_postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - APP_DB_USER=${APP_DB_USER}
+      - APP_DB_PASSWORD=${APP_DB_PASSWORD}
+      - APP_DB_NAME=${APP_DB_NAME}
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432
