@@ -11,6 +11,7 @@
     "turbo": "^1.0.19"
   },
   "turbo": {
+    "baseBranch": "origin/main",
     "pipeline": {
       "lint": {},
       "test": {}
