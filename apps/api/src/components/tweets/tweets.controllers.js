@@ -9,11 +9,9 @@ async function httpGetAllTweets(req, res) {
 async function httpCreateNewTweet(req, res) {
   const { ownerId, tweet } = req.body
 
-  const data = await createNewTweet(ownerId, tweet)
+  const createdTweet = await createNewTweet(ownerId, tweet)
 
-  if (data.rowCount === 1) {
-    return res.status(201).json({ status: 'ok' })
-  }
+  return res.status(201).json({ ...createdTweet })
 }
 
 module.exports = { httpGetAllTweets, httpCreateNewTweet }

@@ -28,7 +28,8 @@ services:
     depends_on:
       - postgres
     command: yarn run dev
-    env_file: ./apps/api/.env-sample
+    env_file:
+      - ./apps/api/.env
 
   postgres:
     image: postgres
@@ -43,3 +44,5 @@ services:
       - ./db:/docker-entrypoint-initdb.d/
     ports:
       - 5432:5432
+    env_file:
+      - ./apps/api/.env

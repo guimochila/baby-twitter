@@ -6,24 +6,26 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
-    "load:data": "node data/seed.js",
-    "delete:data": "node data/seed.js --delete",
+    "load:data": "cross-env NODE_ENV=test sequelize-cli db:seed:all",
+    "delete:data": "cross-env NODE_ENV=test sequelize-cli db:seed:undo:all",
     "lint": "eslint ./src --ext .js",
     "test": "cross-env NODE_ENV=test jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "config": "^3.3.6",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pg": "^8.7.1",
+    "sequelize": "^7.0.0-alpha.4",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.5",
     "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.3.0",
     "supertest": "^6.1.6"
   }
 }

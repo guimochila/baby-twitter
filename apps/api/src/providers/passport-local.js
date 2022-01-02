@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const { getUser } = require('../components/users/user.service')
 
 async function verifyUser(email, password, done) {
-  const [user] = await getUser(email)
+  const user = await getUser(email)
 
   if (!user) {
     return done(null, false, { error: 'Invalid email or password.' })

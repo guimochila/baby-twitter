@@ -1,26 +1,28 @@
-const { pool } = require('../../utils/database')
+const { Tweet, User } = require('../../models')
 
 async function getAllTweets() {
-  const selectAllTweetsText = `SELECT tw.id, tw.tweet, name, tw.created_at
-    FROM tweets tw
-    JOIN users ON users.id = tw.owner_id
-    ORDER BY created_at DESC`
-  const data = await pool.query(selectAllTweetsText)
-  const tweets = await data.rows
+  const tweets = await Tweet.findAll({
+    attributes: {
+      exclude: ['ownerId'],
+    },
+    include: {
+      model: User,
+      attributes: ['name'],
+      as: 'user',
+    },
+    order: [['createdAt', 'DESC']],
+  })
 
   return tweets
 }
 
 async function createNewTweet(id, tweet) {
-  const insertNewTweetText = `
-    INSERT INTO tweets
-    VALUES
-      (DEFAULT, $1, $2);
-  `
+  const { dataValues } = await Tweet.create({
+    ownerId: id,
+    text: tweet,
+  })
 
-  const data = await pool.query(insertNewTweetText, [id, tweet])
-
-  return data
+  return dataValues
 }
 
 module.exports = { getAllTweets, createNewTweet }

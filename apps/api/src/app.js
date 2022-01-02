@@ -2,13 +2,19 @@ const express = require('express')
 const cors = require('cors')
 const passport = require('passport')
 const helmet = require('helmet')
-const { getRoutes } = require('./routes')
+const apiRoutes = require('./routes')
 const { notFoundHandler, globalErrorHandler } = require('./utils/errorHandler')
+const { httpLogger } = require('./utils/logger')
 
 const app = express()
 
+app.use(httpLogger)
 app.use(helmet())
-app.use(cors())
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+  }),
+)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(passport.initialize())
@@ -16,7 +22,7 @@ app.use(passport.initialize())
 require('./providers/passport-local')
 require('./providers/passport-jwt')
 
-app.use('/api', getRoutes())
+app.use('/api', apiRoutes)
 
 /* Handling errors*/
 app.use(notFoundHandler)

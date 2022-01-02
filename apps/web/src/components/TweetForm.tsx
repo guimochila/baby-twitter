@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { useMutation, useQueryClient } from 'react-query'
+import { useUser } from '../contexts/Authentication'
 import { postTweet } from '../utils/tweets'
 
 function TweetForm() {
+  const { user } = useUser()
   const [tweet, setTweet] = React.useState('')
   const queryClient = useQueryClient()
   const { mutate, isSuccess, isError } = useMutation(postTweet, {
@@ -21,7 +23,10 @@ function TweetForm() {
     event,
   ) => {
     event.preventDefault()
-    await mutate({ id: '1', tweet })
+
+    if (!user?.id) return
+
+    await mutate({ id: user?.id!, tweet })
   }
 
   return (

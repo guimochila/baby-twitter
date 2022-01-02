@@ -2,7 +2,8 @@ const { createServer } = require('http')
 require('dotenv').config()
 const { app } = require('./app')
 const { normalizePort } = require('./utils/normalizePort')
-const { pool } = require('./utils/database')
+const { sequelize } = require('./models')
+const { logger } = require('./utils/logger.js')
 
 /* Setting PORT number*/
 const PORT = normalizePort(process.env.PORT || 3001)
@@ -11,10 +12,10 @@ app.set('port', PORT)
 const server = createServer(app)
 
 async function startServer() {
-  await pool.connect()
+  await sequelize.sync()
 
   server.listen(PORT, () => {
-    console.log(`Server started listening at port: ${PORT}`)
+    logger.info(`Server started listening at port: ${PORT}`)
   })
 }
 

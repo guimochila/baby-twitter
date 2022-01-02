@@ -2,7 +2,7 @@ import * as React from 'react'
 
 type User = {
   email: string
-  id: number
+  id: string
   name: string
   token: string
 }

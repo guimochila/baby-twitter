@@ -4,9 +4,11 @@ import ListItemText from '@mui/material/ListItemText'
 
 export interface TweetType {
   id: string
-  name: string
-  tweet: string
-  created_at: string
+  text: string
+  createdAt: string
+  user: {
+    name: string
+  }
 }
 
 interface TweetProps {
@@ -14,12 +16,12 @@ interface TweetProps {
 }
 
 function Tweet({ tweet }: TweetProps) {
-  const tweetDate = new Date(tweet.created_at).toLocaleString('es')
+  const tweetDate = new Date(tweet.createdAt).toLocaleString('es')
   return (
     <ListItem alignItems="flex-start">
       <ListItemText
-        primary={`${tweet.name} - ${tweetDate}`}
-        secondary={<React.Fragment>{tweet.tweet}</React.Fragment>}
+        primary={`${tweet.user.name} - ${tweetDate}`}
+        secondary={<React.Fragment>{tweet.text}</React.Fragment>}
       />
     </ListItem>
   )
