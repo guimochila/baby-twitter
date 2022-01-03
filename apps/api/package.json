@@ -9,7 +9,7 @@
     "load:data": "cross-env NODE_ENV=test sequelize-cli db:seed:all",
     "delete:data": "cross-env NODE_ENV=test sequelize-cli db:seed:undo:all",
     "lint": "eslint ./src --ext .js",
-    "test": "cross-env NODE_ENV=test jest"
+    "test": "cross-env NODE_ENV=test jest --detectOpenHandles --force-exit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -37,5 +37,10 @@
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.3.0",
     "supertest": "^6.1.6"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
   }
 }

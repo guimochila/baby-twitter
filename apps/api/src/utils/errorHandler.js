@@ -51,7 +51,7 @@ function handleDevErrors(err, res) {
  * @param {express.Response} res - Response object
  */
 function handleProdErrors(err, res) {
-  const status = err.status || 500
+  const status = 500
   const message = err.message || 'Ooops! Something went wrong!'
 
   res.status(status).json({ status, message })

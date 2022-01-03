@@ -8,7 +8,9 @@ const { httpLogger } = require('./utils/logger')
 
 const app = express()
 
-app.use(httpLogger)
+if (process.env.NODE_ENV !== 'test') {
+  app.use(httpLogger)
+}
 app.use(helmet())
 app.use(
   cors({
