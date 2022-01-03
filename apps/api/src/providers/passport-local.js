@@ -4,6 +4,16 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { getUser } = require('../components/users/user.service')
 
+/**
+ * Login user
+ *
+ * @async
+ * @function verifyUser
+ * @param {string} email - The user email.
+ * @param {string} password - The user password.
+ * @param  {Function} done - Passport done function
+ * @returns {Function} - Return Passport callback done
+ */
 async function verifyUser(email, password, done) {
   const user = await getUser(email)
 

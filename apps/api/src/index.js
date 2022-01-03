@@ -11,6 +11,11 @@ app.set('port', PORT)
 
 const server = createServer(app)
 
+/**
+ * Start express app.
+ *
+ * @function
+ */
 async function startServer() {
   await sequelize.sync()
 

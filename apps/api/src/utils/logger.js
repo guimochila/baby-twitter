@@ -1,5 +1,6 @@
 const morgan = require('morgan')
-const { createLogger, format, transports } = require('winston')
+const winston = require('winston')
+const { createLogger, format, transports } = winston
 const { timestamp, combine, printf, errors, json } = format
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -14,6 +15,11 @@ const levels = {
   fatal: 60,
 }
 
+/**
+ * Build development logs mode
+ *
+ * @returns {winston.Logger} - Returns a instance of winston
+ */
 function buildDevLogs() {
   const logFormat = printf(({ level, message, timestamp, stack }) => {
     return `${timestamp} ${level}: ${stack || message}`
@@ -32,6 +38,11 @@ function buildDevLogs() {
   })
 }
 
+/**
+ * Build prod logs mode
+ *
+ * @returns {winston.Logger} - Returns a instance of winston
+ */
 function buildProdLogs() {
   return createLogger({
     format: combine(timestamp(), errors({ stack: true }), json()),

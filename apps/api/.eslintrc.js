@@ -5,12 +5,13 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:jsdoc/recommended', 'prettier'],
   parserOptions: {
     ecmaVersion: 13,
   },
   rules: {
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+    'jsdoc/valid-types': 'off',
   },
-  plugins: ['prettier'],
+  plugins: ['jsdoc', 'prettier'],
 }

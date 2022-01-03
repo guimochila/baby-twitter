@@ -1,17 +1,26 @@
 const { User } = require('../../models')
 
+/**
+ * Tweet response structure.
+ *
+ * @typedef {object} user
+ * @property {string} id - Unique id in UUIDV4 format
+ * @property {string} email - User email
+ * @property {string} name - User name
+ * @property {string} token - JWT
+ */
+
+/**
+ * Get user from database by email
+ *
+ * @async
+ * @function getUser
+ * @param {string} email - The user email.
+ * @returns {user} - Returns a user object if found
+ */
 async function getUser(email) {
-  // const selectUserByEmailText = `SELECT * FROM users WHERE email = $1`
+  const user = User.findOne({ where: { email } })
 
-  // const user = await pool.query(selectUserByEmailText, [email])
-
-  try {
-    const user = User.findOne({ where: { email } })
-
-    return user
-  } catch (error) {
-    console.log(error)
-    throw new Error(error)
-  }
+  return user
 }
 module.exports = { getUser }
