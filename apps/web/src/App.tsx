@@ -11,7 +11,7 @@ function App() {
 
   return (
     <Router>
-      <h3>Baby Twitter</h3>
+      <h3 style={{ textAlign: 'center' }}>Baby Twitter</h3>
       <Grid
         container
         spacing={0}

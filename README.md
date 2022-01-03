@@ -30,6 +30,11 @@ To load data sample, use the command:
   $ yarn run load:data
 ```
 
+| User              | Password |
+| :---------------- | :------: |
+| john@example.com  | testing  |
+| james@example.com | testing  |
+
 ## Delete sample data
 
 To load data sample, use the command:
